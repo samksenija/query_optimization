@@ -1,4 +1,4 @@
-INSERT INTO STATISTICS (id, executed_query, execution_plan, cost, layer_tag, change_applied)
+INSERT INTO STATISTICS (id, executed_query, execution_plan, duration, layer_tag, change_applied)
 VALUES (
 ,
 "",
@@ -9,7 +9,7 @@ VALUES (
 );
 
 #EXAMPLES
-INSERT INTO STATISTICS (id, executed_query, execution_plan, cost, layer_tag, change_applied)
+INSERT INTO STATISTICS (id, executed_query, execution_plan, duration, layer_tag, change_applied)
 VALUES (
 1,
 "SELECT * FROM orders where O_ORDERPRIORITY = '5-LOW' AND O_CUSTKEY = 1910;",
@@ -20,7 +20,7 @@ VALUES (
 NULL
 );
 
-INSERT INTO STATISTICS (id, executed_query, execution_plan, cost, layer_tag, change_applied)
+INSERT INTO STATISTICS (id, executed_query, execution_plan, duation, layer_tag, change_applied)
 VALUES (
 1,
 "SELECT * FROM orders where O_CUSTKEY = 1910 AND O_ORDERPRIORITY = '5-LOW';",
@@ -31,3 +31,5 @@ VALUES (
 );
 
 SELECT * FROM STATISTICS;
+
+ALTER TABLE STATISTICS RENAME COLUMN cost TO duration;

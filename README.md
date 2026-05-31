@@ -8,8 +8,8 @@ FLUSH TABLES;
 FLUSH STATUS;
 ```
 <br/>
-<br/>
 If you want to measure the true "cold" execution speed of a query without any caching help, apply these temporary aggressive flushing parameters (my.ini):
+
 ```
 [mysqld]
 innodb_old_blocks_pct = 5

@@ -1,11 +1,19 @@
 import connection
-from utils import flush_cache
+
+from utils import flush_cache, query_execution_time
 
 cursor = connection.cursor
 
 flush_cache(cursor)
 
-query = "SELECT * FROM tpch.orders WHERE O_ORDERKEY = 290 AND O_ORDERSTATUS = 'F'"
+query = "SELECT * FROM orders where O_CUSTKEY = 1910 AND O_ORDERPRIORITY = '5-LOW';"
+
+identifier = 1
+layer_tag = '1st'
+change_applied = "Change of filter column order"
+note = None
+duration = query_execution_time(cursor, query)
+
 results = []
 
 queries = [
@@ -24,16 +32,18 @@ insert_query = """
     explain_tree, explain_analyze, duration, layer_tag, change_applied, note) 
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
-values = (2, 
-    str(query), 
+values = (
+    identifier, 
+    query, 
     str(results[0][0]), 
-    str(results[1][0]), 
-    str(results[2][0]), 
-    str(results[3][0]), 
-    None, 
-    'original',
-    None, 
-    "Primary key (O_ORDERKEY) is always index as well, so optimizator will use it first when performing optimization, no matter where it's ordered in query.")
+    results[1][0][0], 
+    results[2][0][0], 
+    results[3][0][0], 
+    duration, 
+    layer_tag,
+    change_applied, 
+    note
+    )
 
 insert_into_statistics = cursor.execute(insert_query, values) 
 connection.connection.commit()

@@ -30,3 +30,8 @@ def query_execution_time(cursor, query):
     execution_time = end_time - start_time
     
     return f"{execution_time:.6f} sec"
+
+
+# When deciding which column has higher selectivity
+def calculate_column_distinctiveness(column, table):
+    distinctiveness  = "SELECT COUNT(DISTINCT " + column + ") / COUNT(*) FROM " + table + ";"

@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS STATISTICS (
     layer_tag ENUM('original', '1st', '2nd') DEFAULT 'original',
     column_distinctiveness VARCHAR(350),
     number_of_rows_per_table VARCHAR(250),
+    database_information VARCHAR(100),
     change_applied VARCHAR(250),
     note VARCHAR(350),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP

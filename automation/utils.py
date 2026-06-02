@@ -33,7 +33,9 @@ def query_execution_time(cursor, query):
 
 
 # When deciding which column has higher selectivity
-def calculate_column_distinctiveness(column, table):
-    distinctiveness  = "SELECT COUNT(DISTINCT " + column + ") / COUNT(*) FROM " + table + ";"
+def calculate_column_distinctiveness(cursor, column, table):
+    distinctiveness_query  = "SELECT COUNT(DISTINCT " + column + ") / COUNT(*) FROM " + table + ";"
+    
+    distinctiveness = cursor.execute(distinctiveness_query)
     
     return [table, column, distinctiveness]

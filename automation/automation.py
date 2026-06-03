@@ -1,6 +1,6 @@
 import connection
 
-from utils import flush_cache, query_execution_time
+from utils import flush_cache, query_execution_time, calculate_column_distinctiveness, number_of_rows_per_table, truncate_table, select_from_statitistic_table
 
 cursor = connection.cursor
 
@@ -26,6 +26,11 @@ queries = [
 for q in queries:
     cursor.execute(q)
     results.append(cursor.fetchall())
+    
+column = ""
+table = ""
+column_distinctiveness = calculate_column_distinctiveness(cursor, column, table)
+number_of_rows_per_table = number_of_rows_per_table(cursor, table)
 
 insert_query = """
     INSERT INTO STATISTICS (
@@ -52,3 +57,7 @@ values = (
 
 insert_into_statistics = cursor.execute(insert_query, values) 
 connection.connection.commit()
+
+# Occasionaly needed functions
+# select_from_statitistic_table(cursor)
+# truncate_table(cursor, table)

@@ -29,9 +29,10 @@ for q in queries:
 
 insert_query = """
     INSERT INTO STATISTICS (id, executed_query, explain_query, explain_json, 
-    explain_tree, explain_analyze, duration, layer_tag, change_applied, note) 
+        explain_tree, explain_analyze, duration, layer_tag, change_applied, note) 
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
+
 values = (
     identifier, 
     query, 

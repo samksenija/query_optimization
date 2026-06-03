@@ -36,6 +36,18 @@ def query_execution_time(cursor, query):
 def calculate_column_distinctiveness(cursor, column, table):
     distinctiveness_query  = "SELECT COUNT(DISTINCT " + column + ") / COUNT(*) FROM " + table + ";"
     
-    distinctiveness = cursor.execute(distinctiveness_query)
+    cursor.execute(distinctiveness_query)
+    distinctiveness = cursor.fetchall()
     
     return [table, column, distinctiveness]
+
+
+# Even altough this information isn't neccessarily too informative atm
+# It is needed to reference which version of tpch was used
+def number_of_rows_per_table(cursor, table):
+    row_count_per_table_query = "SELECT COUNT(*) FROM " + table + ";"
+    
+    cursor.execute(row_count_per_table_query)
+    row_count_per_table = cursor.fetchall()
+    
+    return [table, row_count_per_table]

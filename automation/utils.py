@@ -40,7 +40,7 @@ def calculate_column_distinctiveness(cursor, column, table):
     cursor.execute(distinctiveness_query)
     distinctiveness = cursor.fetchall()
     
-    return [table, column, distinctiveness]
+    return {"table": table, "column": column, "distinctiveness": distinctiveness[0]}
 
 
 # Even altough this information isn't neccessarily too informative atm
@@ -52,7 +52,7 @@ def number_of_rows_per_table(cursor, table):
     cursor.execute(row_count_per_table_query)
     row_count_per_table = cursor.fetchall()
     
-    return [table, row_count_per_table]
+    return {"table": table, "row_count_per_table": row_count_per_table[0]}
 
 
 # Empty table for testing purposes

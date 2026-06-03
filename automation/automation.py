@@ -6,11 +6,11 @@ cursor = connection.cursor
 
 flush_cache(cursor)
 
-query = "SELECT * FROM orders where O_CUSTKEY = 1910 AND O_ORDERPRIORITY = '5-LOW';"
+query = "SELECT * FROM orders where O_ORDERPRIORITY = '5-LOW' AND O_CUSTKEY = 1910;"
 
 identifier = 1
-layer_tag = '1st'
-change_applied = "Change of filter column order"
+layer_tag = 'original'
+change_applied = None
 note = None
 duration = query_execution_time(cursor, query)
 
@@ -27,10 +27,20 @@ for q in queries:
     cursor.execute(q)
     results.append(cursor.fetchall())
     
-column = ""
-table = ""
-column_distinctiveness = calculate_column_distinctiveness(cursor, column, table)
-number_of_rows_per_table = number_of_rows_per_table(cursor, table)
+columns = ["O_ORDERPRIORITY", "O_CUSTKEY"]
+tables = ["orders"]
+database_information = "tpch"
+column_distinctiveness_array = []
+number_of_rows_per_table_array = []
+
+#TODO Cleanup, Add functions
+for table in tables:
+    number_of_rows_per_table_values = number_of_rows_per_table(cursor, table)
+    number_of_rows_per_table_array.append(number_of_rows_per_table_values)
+    
+    for column in columns:
+        column_distinctiveness_value = calculate_column_distinctiveness(cursor, column, table)
+        column_distinctiveness_array.append(column_distinctiveness_value)
 
 insert_query = """
     INSERT INTO STATISTICS (
@@ -39,7 +49,7 @@ insert_query = """
         duration, column_distinctiveness, number_of_rows_per_table, database_information, 
         layer_tag, change_applied, note
     ) 
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
 
 values = (
@@ -49,7 +59,10 @@ values = (
     results[1][0][0], 
     results[2][0][0], 
     results[3][0][0], 
-    duration, 
+    duration,
+    str(column_distinctiveness_array), 
+    str(number_of_rows_per_table_array), 
+    database_information, 
     layer_tag,
     change_applied, 
     note

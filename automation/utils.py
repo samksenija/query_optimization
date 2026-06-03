@@ -67,7 +67,7 @@ def truncate_table(cursor, table):
 
 # Select from STATISTICS table all rows & columns
 def select_from_statitistic_table(cursor):
-    select_from_statitistic_table_query = "SELECT * FROM STATISTICS"
+    select_from_statitistic_table_query = "SELECT * FROM STATISTICS;"
     
     cursor.execure(select_from_statitistic_table_query)
     cursor.fetchall()

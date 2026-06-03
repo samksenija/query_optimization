@@ -28,8 +28,12 @@ for q in queries:
     results.append(cursor.fetchall())
 
 insert_query = """
-    INSERT INTO STATISTICS (id, executed_query, explain_query, explain_json, 
-        explain_tree, explain_analyze, duration, layer_tag, change_applied, note) 
+    INSERT INTO STATISTICS (
+        id, executed_query, 
+        explain_query, explain_json, explain_tree, explain_analyze, 
+        duration, column_distinctiveness, number_of_rows_per_table, database_information, 
+        layer_tag, change_applied, note
+    ) 
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
 

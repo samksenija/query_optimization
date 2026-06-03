@@ -51,3 +51,20 @@ def number_of_rows_per_table(cursor, table):
     row_count_per_table = cursor.fetchall()
     
     return [table, row_count_per_table]
+
+
+# Empty table for testing purposes
+def truncate_table(cursor, table):
+    truncate_table_query = "TRUNCATE TABLE " + table + ";"
+    
+    cursor.execute(truncate_table_query)
+    cursor.fetchall()
+    
+    print("Successfully emptied the table.")
+    
+    
+def select_from_statitistic_table(cursor):
+    select_from_statitistic_table_query = "SELECT * FROM STATISTICS"
+    
+    cursor.execure(select_from_statitistic_table_query)
+    cursor.fetchall()

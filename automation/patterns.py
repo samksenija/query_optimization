@@ -2,12 +2,16 @@
 import re
 
 column_names = []
-table_names= []
+table_names = []
+joined_table_names = []
 
+# Test queries for validation of RegEx
 query = "SELECT * FROM orders where O_ORDERPRIORITY = '5-LOW' AND O_CUSTKEY = 1910 AND TEST = 15;"
+query_multitable_join = "SELECT c.name, o.order_id, p.product_name, oi.quantity, p.price FROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN order_items oi ON o.order_id = oi.order_id JOIN products p ON oi.product_id = p.product_id;"
 
-extract_column_names_first_step = re.findall('([(AND )]|[(where )]|[(WHERE )]|[(and )]|[(\s)])(\w+)( =)', query)
+extract_column_names_first_step = re.findall('(where| AND| WHERE) (\w+)', query)
 extract_main_table_name_first_step =  re.findall('FROM (\w+)', query)
+extract_join_table_names_first_step = re.findall('JOIN (\w+)', query_multitable_join)
 
 # Here just column names are extracted without the other additional matthes
 def extract_column_names(extract_column_names_first_step):
@@ -18,7 +22,7 @@ def extract_column_names(extract_column_names_first_step):
   
 extract_column_names(extract_column_names_first_step)
 
-#Extract main table name
+# Extract main table name
 def extraxt_main_table_name(extract_main_table_name_first_step):
     for result in extract_main_table_name_first_step:
         table_names.append(result)
@@ -27,4 +31,11 @@ def extraxt_main_table_name(extract_main_table_name_first_step):
     
 extraxt_main_table_name(extract_main_table_name_first_step)
 
+# Extract joined table names
+def extract_joined_table_names(extract_join_table_names_first_step):
+    for result in extract_join_table_names_first_step:
+        joined_table_names.append(result)
+        
+    print(joined_table_names)
 
+extract_joined_table_names(extract_join_table_names_first_step)

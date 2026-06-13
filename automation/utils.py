@@ -34,6 +34,7 @@ def query_execution_time(cursor, query):
 
 # When deciding which column has higher selectivity
 # Returns both column and table
+# TODO try & catch blocks, or separation of correct values from flagged non-existent values 
 def calculate_column_distinctiveness(cursor, column, table):
     distinctiveness_query  = "SELECT COUNT(DISTINCT " + column + ") / COUNT(*) FROM " + table + ";"
     

@@ -1,7 +1,6 @@
 import connection
 
 from utils import flush_cache, query_execution_time, calculate_column_distinctiveness, number_of_rows_per_table, truncate_table, select_from_statitistic_table
-# from patterns import extract_column_names, extraxt_main_table_name, extract_joined_table_names
 
 cursor = connection.cursor
 
@@ -35,12 +34,13 @@ column_distinctiveness_array = []
 number_of_rows_per_table_array = []
 
 #TODO Cleanup, Add functions
+#Do not pick up non-existent column value return flags
 for table in tables:
     number_of_rows_per_table_values = number_of_rows_per_table(cursor, table)
     number_of_rows_per_table_array.append(number_of_rows_per_table_values)
     
     for column in columns:
-        column_distinctiveness_value = calculate_column_distinctiveness(cursor, column, table)
+        column_distinctiveness_value = calculate_column_distinctiveness(cursor, column, table) #Here
         column_distinctiveness_array.append(column_distinctiveness_value)
 
 insert_query = """

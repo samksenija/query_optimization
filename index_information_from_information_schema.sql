@@ -1,3 +1,4 @@
+CREATE TABLE index_per_table_information AS
 SELECT 
     TABLE_NAME AS 'Table',
     INDEX_NAME AS 'Index Name',
@@ -13,3 +14,5 @@ ORDER BY
     TABLE_NAME, 
     INDEX_NAME, 
     SEQ_IN_INDEX;
+    
+SELECT * FROM index_per_table_information;

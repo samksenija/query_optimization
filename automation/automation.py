@@ -1,3 +1,4 @@
+#Seprate branch for automation file, if needed
 import connection
 
 from utils import flush_cache, query_execution_time, calculate_column_distinctiveness, number_of_rows_per_table, truncate_table, select_from_statitistic_table

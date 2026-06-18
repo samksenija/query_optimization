@@ -7,3 +7,11 @@ change_applied = None
 note = None
 
 query_execution_capture(query, identifier, layer_tag, change_applied, note)
+
+query = "SELECT * FROM orders where O_CUSTKEY = 1910 AND O_ORDERPRIORITY = '5-LOW';"
+identifier = 1
+layer_tag = '1st'
+change_applied = 'Change of filter column order'
+note = None
+
+query_execution_capture(query, identifier, layer_tag, change_applied, note)

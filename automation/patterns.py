@@ -17,6 +17,7 @@ extract_join_table_names_first_step = re.findall('(?i)JOIN (\w+)', query_multita
 # print functions are just temporary add on for testing purposes
 # Here just column names are extracted without the other additional matches
 def extract_column_names(query):
+    column_names = []
     extract_column_names_first_step = re.findall('(?i)(where| and) (\w+)', query)
     
     for result in extract_column_names_first_step:
@@ -28,6 +29,7 @@ def extract_column_names(query):
 
 # Extract main table name
 def extraxt_main_table_name(query):
+    table_names = []
     extract_main_table_name_first_step =  re.findall('(?i)FROM (\w+)', query)
     
     for result in extract_main_table_name_first_step:
@@ -39,6 +41,7 @@ def extraxt_main_table_name(query):
 
 # Extract joined table names
 def extract_joined_table_names(query):
+    joined_table_names = []
     extract_join_table_names_first_step = re.findall('(?i)JOIN (\w+)', query)
     
     for result in extract_join_table_names_first_step:

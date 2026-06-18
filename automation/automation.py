@@ -1,7 +1,7 @@
 import connection
 
 from utils import flush_cache, query_execution_time, calculate_column_distinctiveness, number_of_rows_per_table, truncate_table, select_from_statitistic_table
-
+from patterns import extract_column_names,extraxt_main_table_name, extract_joined_table_names
 cursor = connection.cursor
 
 flush_cache(cursor)
@@ -27,8 +27,8 @@ for q in queries:
     cursor.execute(q)
     results.append(cursor.fetchall())
     
-columns = ["O_ORDERPRIORITY", "O_CUSTKEY"]
-tables = ["orders"]
+columns = extract_column_names(query)
+tables = extraxt_main_table_name(query)
 database_information = "tpch"
 column_distinctiveness_array = []
 number_of_rows_per_table_array = []

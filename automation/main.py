@@ -1,17 +1,11 @@
 from query_performance_capture import query_execution_capture
+from queries import queries
 
-query = "SELECT * FROM orders where O_ORDERPRIORITY = '5-LOW' AND O_CUSTKEY = 1910;"
-identifier = 1
-layer_tag = 'original'
-change_applied = None
-note = None
-
-query_execution_capture(query, identifier, layer_tag, change_applied, note)
-
-query = "SELECT * FROM orders where O_CUSTKEY = 1910 AND O_ORDERPRIORITY = '5-LOW';"
-identifier = 1
-layer_tag = '1st'
-change_applied = 'Change of filter column order'
-note = None
-
-query_execution_capture(query, identifier, layer_tag, change_applied, note)
+for main_key, items in queries.items():
+    query = items["query"]
+    identifier = int(main_key[0])
+    layer_tag = items["layer_tag"]
+    change_applied = items["change_applied"]
+    note = items["note"]
+    
+    query_execution_capture(query, identifier, layer_tag, change_applied, note)

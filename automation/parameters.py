@@ -1,4 +1,4 @@
-# Define the parameters for references, to be called dynamically TODO
+# Define the parameters for references, to be called dynamically
 layer_tags = ["original", "1st", "2nd"]
 changes_applied = [None, "Change of filter column order"]
 notes = [

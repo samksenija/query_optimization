@@ -1,10 +1,7 @@
-# Here column names are extracted in order for further processing to occur
+# Here table, column names are extracted in order for further processing to occur
 import re
 
-column_names = []
-table_names = []
-joined_table_names = []
-
+# TEST VALUES AND PARAMETERS
 # Test queries for validation of RegEx
 query = "SELECT * FROM orders where O_ORDERPRIORITY = '5-LOW' AND O_CUSTKEY = 1910 AND TEST = 15;"
 query_multitable_join = "SELECT c.name, o.order_id, p.product_name, oi.quantity, p.price FROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN order_items oi ON o.order_id = oi.order_id JOIN products p ON oi.product_id = p.product_id;"
@@ -49,9 +46,3 @@ def extract_joined_table_names(query):
         
     print(joined_table_names)
     return joined_table_names
-
-
-# Internal calls
-# extract_column_names(extract_column_names_first_step, query)
-# extraxt_main_table_name(extract_main_table_name_first_step, query)
-# extract_joined_table_names(extract_join_table_names_first_step, query_multitable_join)

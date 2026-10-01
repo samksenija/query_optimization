@@ -7,3 +7,10 @@ notes = [
     """Primary key (O_ORDERKEY) is always index as well, so optimizator 
     will use it first when performing optimization, no matter where it's ordered in query."""
 ]
+rules = [
+    "Select only the columns you need, avoiding 'SELECT *' statements",
+    "Filter early",
+    "Index columns used for filtering",
+    "When filtering on a date, prefer a range",
+    "Avoid leading wildcards in searches when possible, for example '%something'"
+]

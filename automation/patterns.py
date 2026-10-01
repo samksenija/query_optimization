@@ -46,3 +46,14 @@ def extract_joined_table_names(query):
         
     print(joined_table_names)
     return joined_table_names
+
+
+def extract_the_join_parameter(query):
+    # ON (\w+.\w+ = \w+.\w+), join condition
+    # This join regex catches aliases JOIN (\w+) (\w+), if an alias has been asigned to join
+    # Catch filter column values /(?i) (\w+) = ([A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+)
+    pass
+
+
+def extract_the_filter_values(query):
+    pass

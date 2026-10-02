@@ -1,17 +1,7 @@
 # Here table, column names are extracted in order for further processing to occur
 import re
+from temp import test_query
 
-# TEST VALUES AND PARAMETERS
-# Test queries for validation of RegEx
-query = "SELECT * FROM orders where O_ORDERPRIORITY = '5-LOW' AND O_CUSTKEY = 1910 AND TEST = 15;"
-query_multitable_join = "SELECT c.name, o.order_id, p.product_name, oi.quantity, p.price FROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN order_items oi ON o.order_id = oi.order_id JOIN products p ON oi.product_id = p.product_id;"
-# RegEx definitions
-extract_column_names_first_step = re.findall('(?i)(where| and) (\w+)', query)
-extract_main_table_name_first_step =  re.findall('(?i)FROM (\w+)', query)
-extract_join_table_names_first_step = re.findall('(?i)JOIN (\w+)', query_multitable_join)
-
-
-# print functions are just temporary add on for testing purposes
 # Here just column names are extracted without the other additional matches
 def extract_column_names(query):
     column_names = []
@@ -20,7 +10,6 @@ def extract_column_names(query):
     for result in extract_column_names_first_step:
         column_names.append(result[1])
         
-    print(column_names)
     return column_names
 
 
@@ -32,7 +21,6 @@ def extraxt_main_table_name(query):
     for result in extract_main_table_name_first_step:
         table_names.append(result)
 
-    print(table_names)
     return table_names
     
 
@@ -44,16 +32,15 @@ def extract_joined_table_names(query):
     for result in extract_join_table_names_first_step:
         joined_table_names.append(result)
         
-    print(joined_table_names)
     return joined_table_names
 
 
-def extract_the_join_parameter(query):
-    # ON (\w+.\w+ = \w+.\w+), join condition
-    # This join regex catches aliases JOIN (\w+) (\w+), if an alias has been asigned to join
-    # Catch filter column values /(?i) (\w+) = ([A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+)
-    pass
+# This function is used for checking the filter and join conditions
+def joins_and_filters(query):
+    joins =re.findall(r"(\w+\.\w+)\s*(=)\s*(\w+\.\w+)", query)
+    all_filters = re.findall(r"(?i) ([(^AND)(\w.+)]+) ([=><]) ([A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>/?]+)", query)
+    like = re.findall(r"(?i)\b([\w.]+)\s+LIKE\s+([A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>/?]+)", query)
 
-
-def extract_the_filter_values(query):
-    pass
+    filters = [x for x in all_filters if x not in joins]
+        
+    return [joins, filters, like]

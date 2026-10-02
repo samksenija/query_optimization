@@ -34,9 +34,10 @@ def extract_joined_table_names(query):
         
     return joined_table_names
 
-
 # This function is used for checking the filter and join conditions
 def joins_and_filters(query):
+    joins, filters, like = [], [], []
+
     joins =re.findall(r"(\w+\.\w+)\s*(=)\s*(\w+\.\w+)", query)
     all_filters = re.findall(r"(?i) ([(^AND)(\w.+)]+) ([=><]) ([A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>/?]+)", query)
     like = re.findall(r"(?i)\b([\w.]+)\s+LIKE\s+([A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>/?]+)", query)
@@ -49,4 +50,4 @@ def joins_and_filters(query):
 def capture_all_the_tabes(query):
     tables = re.findall(r"(?is)\bFROM\b(.*?)\bWHERE\b", query)
 
-    print(tables)
+    return tables

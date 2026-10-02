@@ -40,3 +40,4 @@ extract_join_table_names_first_step = re.findall('(?i)JOIN (\w+)', query_multita
 # JOIN conditions (\w+.\w+ = \w+.\w+)
 # ALL filters ([(^AND)(\w.+)]+) ([=><]) ([A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+)
 # LIKEs ([(^WHERE)(\w.+)]+) LIKE ([A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+)
+# ALL the tables between FROM and WHERE (?is)\bFROM\b(.*?)\bWHERE\b

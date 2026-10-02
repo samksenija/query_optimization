@@ -44,3 +44,9 @@ def joins_and_filters(query):
     filters = [x for x in all_filters if x not in joins]
         
     return [joins, filters, like]
+
+
+def capture_all_the_tabes(query):
+    tables = re.findall( r"(?is)\bFROM\b(.*?)\bWHERE\b", query)
+
+    print(tables)

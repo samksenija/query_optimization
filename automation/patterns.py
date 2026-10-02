@@ -47,6 +47,6 @@ def joins_and_filters(query):
 
 
 def capture_all_the_tabes(query):
-    tables = re.findall( r"(?is)\bFROM\b(.*?)\bWHERE\b", query)
+    tables = re.findall(r"(?is)\bFROM\b(.*?)\bWHERE\b", query)
 
     print(tables)

@@ -21,3 +21,7 @@ If you want to measure the true "cold" execution speed of a query without any ca
 innodb_old_blocks_pct = 5
 innodb_max_dirty_pages_pct = 0
 ```
+
+-------
+
+Database name must be added in .env.

@@ -85,8 +85,11 @@ for table in table_information:
 
 # Calculate the weights
 for table in table_information:
+    # Weight is only relevant if we have both parameters
+    # If not, to leave weight at impossibly high number so it's not processed
     if table['filtered_column_number'] and table['rows']:
         weight = 0
+        # Weight is calculated as filtered colums divided by total value column count
         weight = table['filtered_column_number'] / table['rows']
 
         table['weight'] = round(weight, 3)

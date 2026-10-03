@@ -37,7 +37,8 @@ for table in tables:
         'alias': alias,
         'filter': [], 
         'rows': 0,
-        'filtered_column_number': 0
+        'filtered_column_number': 0,
+        'weight': float('inf')
     })
 
 
@@ -81,3 +82,11 @@ for table in table_information:
         filter_count_per_table = cursor.fetchall()
 
         table['filtered_column_number'] = filter_count_per_table[0][0]
+
+# Calculate the weights
+for table in table_information:
+    if table['filtered_column_number'] and table['rows']:
+        weight = 0
+        weight = table['filtered_column_number'] / table['rows']
+
+        table['weight'] = round(weight, 3)

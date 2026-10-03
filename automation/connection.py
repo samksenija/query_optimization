@@ -11,7 +11,8 @@ try:
         host=os.getenv("host"),
         user=os.getenv("user"),
         password=os.getenv("password"),
-        database=os.getenv("database")
+        database=os.getenv("database"),
+        use_pure=True
     )
 
     if connection.is_connected():

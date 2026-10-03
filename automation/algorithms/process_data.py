@@ -3,6 +3,7 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
+import connection
 from patterns import capture_all_the_tabes, joins_and_filters
 from temp import test_query
 
@@ -46,3 +47,13 @@ for filter in filters:
         if table_name_filter == table['name'] or table_name_filter == table['alias']:
             table['filter'].append(filter)
 
+
+cursor = connection.cursor
+# Query for the needed statistical data
+for table in table_information:
+    row_count_per_table_query = "SELECT COUNT(*) FROM " + table['name'] + ";"
+
+    cursor.execute(row_count_per_table_query)
+    row_count_per_table = cursor.fetchall()
+
+    print(row_count_per_table)

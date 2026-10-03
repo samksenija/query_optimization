@@ -35,7 +35,9 @@ for table in tables:
     table_information.append({
         'name': table_name[0],
         'alias': alias,
-        'filter': []
+        'filter': [], 
+        'rows': 0,
+        'filtered_column_number': 0
     })
 
 
@@ -56,4 +58,18 @@ for table in table_information:
     cursor.execute(row_count_per_table_query)
     row_count_per_table = cursor.fetchall()
 
-    print(row_count_per_table)
+    table['rows'] = row_count_per_table[0][0]
+
+    if table['filter']:
+        for filter_item in table['filter']:
+            column = filter_item[0].split('.')[-1]
+            sign = filter_item[1]
+            value = filter_item[2]
+            filter_count_per_table_query = "SELECT COUNT(*) FROM " + table['name'] + " WHERE " + column + " " + sign + " " + value + ";"
+
+            cursor.execute(filter_count_per_table_query)
+            filter_count_per_table = cursor.fetchall()
+
+            table['filtered_column_number'] = filter_count_per_table[0][0]
+
+print(table_information)

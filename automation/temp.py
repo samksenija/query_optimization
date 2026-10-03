@@ -41,3 +41,47 @@ extract_join_table_names_first_step = re.findall('(?i)JOIN (\w+)', query_multita
 # ALL filters ([(^AND)(\w.+)]+) ([=><]) ([A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+)
 # LIKEs ([(^WHERE)(\w.+)]+) LIKE ([A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+)
 # ALL the tables between FROM and WHERE (?is)\bFROM\b(.*?)\bWHERE\b
+
+
+# What data currently looks like (un)processed
+
+# tables = tables[0].split(",") 
+# [' char_name AS chn', '\n                cast_info AS ci', '\n                company_name AS cn',
+#  '\n                company_type AS ct', '\n                movie_companies AS mc', '\n                role_type AS rt',
+#  '\n                title AS t\n            ']
+
+
+# table_name = table.split() 
+# ['title', 'AS', 't']
+
+# table_information
+# [
+# {'name': 'char_name', 
+#   'alias': 'chn', 
+#   'filter': []
+#  }, 
+# {'name': 'cast_info', 
+#   'alias': 'ci', 
+#   'filter': []
+#   }, 
+# {'name': 'company_name', 
+#   'alias': 'cn', 
+#   'filter': [('cn.country_code', '=', "'[ru]'")]
+#   }, 
+# {'name': 'company_type', 
+#   'alias': 'ct', 
+#   'filter': []
+#   }, 
+# {'name': 'movie_companies', 
+#   'alias': 'mc', 
+#   'filter': []
+#   }, 
+# {'name': 'role_type', 
+#   'alias': 'rt', 
+#   'filter': [('rt.role', '=', "'actor'")]
+#   }, 
+# {'name': 'title',     
+#   'alias': 't', 
+#   'filter': [('t.production_year', '>', '2005')]
+#    }
+# ]

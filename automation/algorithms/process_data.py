@@ -6,6 +6,9 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 from patterns import capture_all_the_tabes, joins_and_filters
 from temp import test_query
 
+
+# TODO Add exception handling
+
 tables = capture_all_the_tabes(test_query)
 tables = tables[0].split(",")
 
@@ -27,8 +30,19 @@ for table in tables:
     if len(table_name) >= 3 and table_name[1].lower() == "as":
         alias = table_name[2]
 
-    # create the table information
+    # Create table dictionary that will be used to process information per table, before joins
     table_information.append({
         'name': table_name[0],
-        'alias': alias
+        'alias': alias,
+        'filter': []
     })
+
+
+# Here, a mapping of corresponding table & filter column is conducted
+for filter in filters:
+    table_name_filter = filter[0].split('.')[0]
+
+    for table in table_information:
+        if table_name_filter == table['name'] or table_name_filter == table['alias']:
+            table['filter'].append(filter)
+

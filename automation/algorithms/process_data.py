@@ -9,6 +9,7 @@ from temp import test_query
 
 
 # TODO Add exception handling
+# TODO LIKE filter needs it's own processing 
 
 tables = capture_all_the_tabes(test_query)
 tables = tables[0].split(",")
@@ -21,13 +22,13 @@ like = filter_information[2]
 table_information = []
 
 for table in tables:
-    # process the result into more meaningful format
+    # Process the result into more meaningful format
     table = table.replace("\n", "").replace(",", "").lstrip().rstrip()
     alias = ''
 
     table_name = table.split()
 
-    # check if there is an alias assigned to table
+    # Check if there is an alias assigned to table
     if len(table_name) >= 3 and table_name[1].lower() == "as":
         alias = table_name[2]
 
@@ -38,7 +39,8 @@ for table in tables:
         'filter': [], 
         'rows': 0,
         'filtered_column_number': 0,
-        'weight': float('inf')
+        'weight': float('inf'),
+        'children': []
     })
 
 
@@ -47,6 +49,7 @@ for filter in filters:
     table_name_filter = filter[0].split('.')[0]
 
     for table in table_information:
+        # Tables can be 'summoned' by name or alias, so both are checked
         if table_name_filter == table['name'] or table_name_filter == table['alias']:
             table['filter'].append(filter)
 
@@ -93,3 +96,16 @@ for table in table_information:
         weight = table['filtered_column_number'] / table['rows']
 
         table['weight'] = round(weight, 3)
+
+
+# Create the parent-child node table relationship
+# Example item: ('t.id', '=', 'mc.movie_id')
+# Tables on the left side are chosen as parents, and those on the right side of '=' sign are chosen as children
+# This choice has no particular meaning
+# As one side had to be parent and other the child, left to right model was chosen
+for table in table_information:
+    for join in joins:
+        parent = join[0].split('.')[0]
+        child = join[2].split('.')[0]
+        if parent == table['name']  or parent == table['alias']:
+            table['children'].append(child)

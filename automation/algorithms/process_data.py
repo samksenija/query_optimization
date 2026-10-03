@@ -53,6 +53,7 @@ for filter in filters:
 cursor = connection.cursor
 # Query for the needed statistical data
 for table in table_information:
+    # Count rows in the table
     row_count_per_table_query = "SELECT COUNT(*) FROM " + table['name'] + ";"
 
     cursor.execute(row_count_per_table_query)
@@ -61,15 +62,22 @@ for table in table_information:
     table['rows'] = row_count_per_table[0][0]
 
     if table['filter']:
+        conditions = []
+
         for filter_item in table['filter']:
             column = filter_item[0].split('.')[-1]
             sign = filter_item[1]
             value = filter_item[2]
-            filter_count_per_table_query = "SELECT COUNT(*) FROM " + table['name'] + " WHERE " + column + " " + sign + " " + value + ";"
 
-            cursor.execute(filter_count_per_table_query)
-            filter_count_per_table = cursor.fetchall()
+            conditions.append(f"{column} {sign} {value}")
 
-            table['filtered_column_number'] = filter_count_per_table[0][0]
+        # Count filtered out rows in the table
+        filter_count_per_table_query = (
+            f"SELECT COUNT(*) FROM {table['name']} "
+            f"WHERE {' AND '.join(conditions)};"
+        )
+            
+        cursor.execute(filter_count_per_table_query)
+        filter_count_per_table = cursor.fetchall()
 
-print(table_information)
+        table['filtered_column_number'] = filter_count_per_table[0][0]

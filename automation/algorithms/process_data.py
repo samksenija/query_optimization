@@ -7,10 +7,14 @@ import connection
 from patterns import capture_all_the_tabes, joins_and_filters
 from temp import test_query
 
-
 # TODO Add exception handling
 # TODO LIKE filter needs it's own processing 
 
+# For clarity purposes, code is broken into several steps, and each is processed as it's own unit
+# Multiple for loops are added, and each has it's own process that it's handling, hence tackling one job at hand
+# Moreover, in this case, each for loop is it's own process, to be conducted in sequential order
+# Data is processed, cleaned, and appended to dictionary in multiple steps
+# Should separate functions be added if needed, in this way the nature of processing is perserved
 tables = capture_all_the_tabes(test_query)
 tables = tables[0].split(",")
 
@@ -32,7 +36,7 @@ for table in tables:
     if len(table_name) >= 3 and table_name[1].lower() == "as":
         alias = table_name[2]
 
-    # Create table dictionary that will be used to process information per table, before joins
+    # Create table dictionary that will be used to process information per table, before join algorithm processing
     table_information.append({
         'name': table_name[0],
         'alias': alias,

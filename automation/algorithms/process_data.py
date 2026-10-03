@@ -25,6 +25,7 @@ like = filter_information[2]
 
 table_information = []
 
+# Procesing of table name and alias, creating the dictionary structure
 for table in tables:
     # Process the result into more meaningful format
     table = table.replace("\n", "").replace(",", "").lstrip().rstrip()
@@ -59,7 +60,7 @@ for filter in filters:
 
 
 cursor = connection.cursor
-# Query for the needed statistical data
+# Query for the needed statistical data, total row count + filtered out row count
 for table in table_information:
     # Count rows in the table
     row_count_per_table_query = "SELECT COUNT(*) FROM " + table['name'] + ";"

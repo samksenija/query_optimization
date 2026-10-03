@@ -92,7 +92,7 @@ for table in table_information:
     # If not, to leave weight at impossibly high number so it's not processed
     if table['filtered_column_number'] and table['rows']:
         weight = 0
-        # Weight is calculated as filtered colums divided by total value column count
+        # Weight is calculated as filtered colums count divided by total column count
         weight = table['filtered_column_number'] / table['rows']
 
         table['weight'] = round(weight, 3)

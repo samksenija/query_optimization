@@ -55,33 +55,74 @@ extract_join_table_names_first_step = re.findall('(?i)JOIN (\w+)', query_multita
 # ['title', 'AS', 't']
 
 # table_information
-# [
-# {'name': 'char_name', 
-#   'alias': 'chn', 
-#   'filter': []
-#  }, 
-# {'name': 'cast_info', 
-#   'alias': 'ci', 
-#   'filter': []
-#   }, 
-# {'name': 'company_name', 
-#   'alias': 'cn', 
-#   'filter': [('cn.country_code', '=', "'[ru]'")]
-#   }, 
-# {'name': 'company_type', 
-#   'alias': 'ct', 
-#   'filter': []
-#   }, 
-# {'name': 'movie_companies', 
-#   'alias': 'mc', 
-#   'filter': []
-#   }, 
-# {'name': 'role_type', 
-#   'alias': 'rt', 
-#   'filter': [('rt.role', '=', "'actor'")]
-#   }, 
-# {'name': 'title',     
-#   'alias': 't', 
-#   'filter': [('t.production_year', '>', '2005')]
-#    }
+# tables = [
+#     {
+#         'name': 'char_name',
+#         'alias': 'chn',
+#         'filter': [],
+#         'rows': 4314872,
+#         'filtered_column_number': 0,
+#         'weight': inf,
+#         'children': ['ci']
+#     },
+#     {
+#         'name': 'cast_info',
+#         'alias': 'ci',
+#         'filter': [],
+#         'rows': 63475827,
+#         'filtered_column_number': 0,
+#         'weight': inf,
+#         'children': ['mc']
+#     },
+#     {
+#         'name': 'company_name',
+#         'alias': 'cn',
+#         'filter': [
+#             ('cn.country_code', '=', "'[ru]'")
+#         ],
+#         'rows': 106736,
+#         'filtered_column_number': 663,
+#         'weight': 0.006,
+#         'children': ['mc']
+#     },
+#     {
+#         'name': 'company_type',
+#         'alias': 'ct',
+#         'filter': [],
+#         'rows': 4,
+#         'filtered_column_number': 0,
+#         'weight': inf,
+#         'children': ['mc']
+#     },
+#     {
+#         'name': 'movie_companies',
+#         'alias': 'mc',
+#         'filter': [],
+#         'rows': 4958296,
+#         'filtered_column_number': 0,
+#         'weight': inf,
+#         'children': []
+#     },
+#     {
+#         'name': 'role_type',
+#         'alias': 'rt',
+#         'filter': [
+#             ('rt.role', '=', "'actor'")
+#         ],
+#         'rows': 12,
+#         'filtered_column_number': 1,
+#         'weight': 0.083,
+#         'children': ['ci']
+#     },
+#     {
+#         'name': 'title',
+#         'alias': 't',
+#         'filter': [
+#             ('t.production_year', '>', '2005')
+#         ],
+#         'rows': 4736114,
+#         'filtered_column_number': 2539122,
+#         'weight': 0.536,
+#         'children': ['mc', 'ci']
+#     }
 # ]

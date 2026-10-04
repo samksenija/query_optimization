@@ -1,5 +1,5 @@
 # from process_data import table_information
-from utils import min_weight
+from utils import min_weight, find_child_table_and_check_weight
 
 # Added for tet purposes
 table_information = [
@@ -74,5 +74,18 @@ table_information = [
     }
 ]
 
-current_min_weight = min_weight(table_information)
-print(current_min_weight)
+table, weight, children = min_weight(table_information)
+processed_tables = []
+
+if table:
+    processed_tables.append(table)
+
+if len(children) > 0:
+    childs_children, weight = find_child_table_and_check_weight(children, table_information, weight)
+
+if len(childs_children) > 0:
+    pass
+else: 
+    processed_tables.append(children[0].replace("'", ""))
+
+print(processed_tables)

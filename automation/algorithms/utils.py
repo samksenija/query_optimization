@@ -6,11 +6,10 @@ def min_weight(table_information, already_processed_tables = []):
     children = []
 
     for table in table_information:
-        table_name = table['name']
-
-        if table['weight'] < weight and table_name not in already_processed_tables:
+        if (table['weight'] < weight and 
+            table['name'] not in already_processed_tables and table['alias'] not in already_processed_tables):
             weight = table['weight']
-            table_name = table_name
+            table_name = table['name']
             children = table['children']
 
     return table_name, weight, children

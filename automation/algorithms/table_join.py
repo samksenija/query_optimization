@@ -75,10 +75,13 @@ table_information = [
 ]
 
 table, weight, children = min_weight(table_information)
+print(table, weight, children)
 processed_tables = []
 
 if table:
     processed_tables.append(table)
+
+childs_children = []
 
 if len(children) > 0:
     childs_children, weight = find_child_table_and_check_weight(children, table_information, weight)
@@ -87,5 +90,13 @@ if len(childs_children) > 0:
     pass
 else: 
     processed_tables.append(children[0].replace("'", ""))
+    table, weight, children = min_weight(table_information, processed_tables)
+    print(table, weight, children)
+    # Establish the movement of traversing trough nodes, explore the children and weights
+    # Until you can, move back up the tree if no more children down the tree
+    # Boundaries in circual movement, with concatenating to the processed nodes
+    if len(children) > 0:
+        childs_children, weight = find_child_table_and_check_weight(children, table_information, weight)
+        print(childs_children, weight)
 
 print(processed_tables)

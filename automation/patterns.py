@@ -1,6 +1,6 @@
 # Here table, column names are extracted in order for further processing to occur
 import re
-from temp import test_query
+from automation.temp.temp import test_query
 
 # Here just column names are extracted without the other additional matches
 def extract_column_names(query):

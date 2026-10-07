@@ -14,8 +14,8 @@ Graph = nx.DiGraph()
 # left = ['t', 't', 'chn', 'rt', 'cn', 'ct', 'ci']
 # right = ['mc', 'ci', 'ci', 'ci', 'mc', 'mc', 'mc']
 
-left = ['an', 'n', 'ci', 't', 'mk', 't', 'mc', 'an', 'ci', 'ci', 'mc'] #16a
-right = ['n', 'ci', 't', 'mk', 'k', 'mc', 'cn', 'ci', 'mc', 'mk', 'mk'] #16a
+left = ['an', 'n', 'ci', 't', 'mk', 't', 'mc', 'an', 'ci', 'ci', 'mc'] #16a; 'an' is a parent as left side is the one with
+right = ['n', 'ci', 't', 'mk', 'k', 'mc', 'cn', 'ci', 'mc', 'mk', 'mk'] #16; higher sum value 
 
 
 if len(right) == len(left):

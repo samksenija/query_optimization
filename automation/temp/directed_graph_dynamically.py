@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 
 Graph = nx.DiGraph()
 
+# TODO: To test other cases, if additional cases coverage is needed
+# TODO: Test edgecases
+
 left = ['kt', 't', 't', 't', 'mk', 'mk', 'ci', 'chn', 'n', 'k', 'cct1', 'cct2']
 right = ['t', 'mk', 'ci', 'cc', 'ci', 'cc', 'cc', 'ci', 'ci', 'mk', 'cc', 'cc']
 

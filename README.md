@@ -35,3 +35,11 @@ Packages:
 `pip install pygraphviz`
 
 `pip install matplotlib`
+
+`pip install graphviz`
+
+---------
+
+Installations:
+
+Graphviz: https://graphviz.org/download/

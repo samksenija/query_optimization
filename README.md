@@ -25,3 +25,13 @@ innodb_max_dirty_pages_pct = 0
 -------
 
 Database name must be added in .env.
+
+------
+
+Packages:
+
+`pip install networkx`
+
+`pip install pygraphviz`
+
+`pip install matplotlib`

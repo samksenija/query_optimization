@@ -8,8 +8,15 @@ Graph = nx.DiGraph()
 # TODO: Test edgecases
 # TODO: Cleanup needed
 
-left = ['kt', 't', 't', 't', 'mk', 'mk', 'ci', 'chn', 'n', 'k', 'cct1', 'cct2']
-right = ['t', 'mk', 'ci', 'cc', 'ci', 'cc', 'cc', 'ci', 'ci', 'mk', 'cc', 'cc']
+# left = ['kt', 't', 't', 't', 'mk', 'mk', 'ci', 'chn', 'n', 'k', 'cct1', 'cct2'] #20a
+# right = ['t', 'mk', 'ci', 'cc', 'ci', 'cc', 'cc', 'ci', 'ci', 'mk', 'cc', 'cc'] #20a
+
+# left = ['t', 't', 'chn', 'rt', 'cn', 'ct', 'ci']
+# right = ['mc', 'ci', 'ci', 'ci', 'mc', 'mc', 'mc']
+
+left = ['an', 'n', 'ci', 't', 'mk', 't', 'mc', 'an', 'ci', 'ci', 'mc'] #16a
+right = ['n', 'ci', 't', 'mk', 'k', 'mc', 'cn', 'ci', 'mc', 'mk', 'mk'] #16a
+
 
 if len(right) == len(left):
     print(True)
@@ -93,7 +100,7 @@ for i in primary_array:
     else: 
         if len(processed)  != len(all_elements_unique):
             unprocessed = [x for x in all_elements_unique if x not in processed]
-
+            print(unprocessed)
             for index_secondary, element_unprocessed in enumerate(secondary_array):
                 if element_unprocessed in unprocessed:
                     Graph.add_edge(primary_array[index_secondary], element_unprocessed)

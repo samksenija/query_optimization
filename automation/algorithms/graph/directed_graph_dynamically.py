@@ -35,16 +35,10 @@ sum_r, max_r = count_sum_and_max_element(counts_r)
 max_key_l = find_max_key(counts_l, processed)
 max_key_r = find_max_key(counts_r, processed)
 
-primary_array = right
-secondary_array = left
-max_key = max_key_r
-side = 'right'
+primary_array, secondary_array, max_key, side = right, left, max_key_r, "right"
 
 if sum_l > sum_r:
-    primary_array = left
-    secondary_array = right
-    max_key = max_key_l
-    side = 'left'
+    primary_array, secondary_array, max_key, side = left, right, max_key_l, "left"
 
 for i in primary_array:
     if max_key:

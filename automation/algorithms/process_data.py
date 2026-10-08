@@ -5,16 +5,11 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 import connection
 from patterns import capture_all_the_tabes, joins_and_filters
-from automation.temp.temp import test_query
+from temp.temp import test_query
 
 # TODO Add exception handling
 # TODO LIKE, IN filter needs it's own processing - filters can have different selectivity concatenated with AND, OR in single statement
 
-# For clarity purposes, code is broken into several steps, and each is processed as it's own unit
-# Multiple for loops are added, and each has it's own process that it's handling, hence tackling one job at hand
-# Moreover, in this case, each for loop is it's own process, to be conducted in sequential order
-# Data is processed, cleaned, and appended to dictionary in multiple steps
-# Should separate functions be added if needed, in this way the nature of processing is perserved
 tables = capture_all_the_tabes(test_query)
 tables = tables[0].split(",")
 

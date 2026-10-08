@@ -53,3 +53,11 @@ Graphviz: https://graphviz.org/download/
 - In order to create a meaningful graph structure, the number of table occurences is counted this sum determines the side that will contain the root node, in this case the node that would have most edges to other nodes, and this sum is crucial factor in the root node choice
 - Since JOIN creation does not have to follow a predetermined structure of how many and which tables will be joined, such a presumption had to be made in order to setup the structure that could come close to optimal one, as main point was to enable graph traversal
 - Tables are 'chained' to one another depending, of course, to their logic in the original query, and should there be a duplicate, the one closest to the root & already processed is preserved
+
+#### `process_data.py`
+
+- For clarity purposes, code is broken into several steps, and each is processed as it's own unit
+- Multiple for loops are added, and each has it's own process that it's handling, hence tackling one job at hand
+- Moreover, in this case, each for loop is it's own process, to be conducted in sequential order
+- Data is processed, cleaned, and appended to dictionary in multiple steps
+- Should separate functions be added if needed, in this way the nature of processing is perserved

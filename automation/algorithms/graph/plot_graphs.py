@@ -12,7 +12,7 @@ def plot_networkx_graph(Graph):
     nx.draw(Graph, pos, with_labels=True, arrows=True, node_color="white", edgecolors="black", node_size=700, font_size=10, arrowsize=10)
 
     labels = {
-        node: f"                    {Graph.nodes[node]['weight']}"
+        node: f"{Graph.nodes[node]['weight']:>25}"
         for node in Graph.nodes
     }
 

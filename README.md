@@ -43,3 +43,13 @@ Packages:
 Installations:
 
 Graphviz: https://graphviz.org/download/
+
+--------
+## Overview
+
+#### `directed_graph_dynamically.py`
+
+- In JOINS we have the tables from 'both sides' of the equality operator
+- In order to create a meaningful graph structure, the number of table occurences is counted this sum determines the side that will contain the root node, in this case the node that would have most edges to other nodes, and this sum is crucial factor in the root node choice
+- Since JOIN creation does not have to follow a predetermined structure of how many and which tables will be joined, such a presumption had to be made in order to setup the structure that could come close to optimal one, as main point was to enable graph traversal
+- Tables are 'chained' to one another depending, of course, to their logic in the original query, and should there be a duplicate, the one closest to the root & already processed is preserved

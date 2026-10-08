@@ -199,3 +199,12 @@ table_information = [
         'children': ['mc', 'ci']
     }
 ]
+# JOIN graph test tables
+# left = ['kt', 't', 't', 't', 'mk', 'mk', 'ci', 'chn', 'n', 'k', 'cct1', 'cct2'] #20a
+# right = ['t', 'mk', 'ci', 'cc', 'ci', 'cc', 'cc', 'ci', 'ci', 'mk', 'cc', 'cc'] #20a
+
+# left = ['t', 't', 'chn', 'rt', 'cn', 'ct', 'ci'] #10a
+# right = ['mc', 'ci', 'ci', 'ci', 'mc', 'mc', 'mc'] #10a
+
+left = ['an', 'n', 'ci', 't', 'mk', 't', 'mc', 'an', 'ci', 'ci', 'mc'] #16a; 'an' is a parent as left side is the one with
+right = ['n', 'ci', 't', 'mk', 'k', 'mc', 'cn', 'ci', 'mc', 'mk', 'mk'] #16; higher sum value 

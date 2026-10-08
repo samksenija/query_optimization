@@ -7,6 +7,8 @@ Graph = nx.DiGraph()
 # TODO: To test other cases, if additional cases coverage is needed
 # TODO: Test edgecases
 # TODO: Cleanup needed
+# Prepare the table arrays, and weights
+# TODO: Nicer grpah presentation needed with Graphviz
 
 # left = ['kt', 't', 't', 't', 'mk', 'mk', 'ci', 'chn', 'n', 'k', 'cct1', 'cct2'] #20a
 # right = ['t', 'mk', 'ci', 'cc', 'ci', 'cc', 'cc', 'ci', 'ci', 'mk', 'cc', 'cc'] #20a
@@ -17,6 +19,15 @@ Graph = nx.DiGraph()
 left = ['an', 'n', 'ci', 't', 'mk', 't', 'mc', 'an', 'ci', 'ci', 'mc'] #16a; 'an' is a parent as left side is the one with
 right = ['n', 'ci', 't', 'mk', 'k', 'mc', 'cn', 'ci', 'mc', 'mk', 'mk'] #16; higher sum value 
 
+# In JOINS we have the tables from 'both sides' of the equality operator
+# In order to create a meaningful graph structure, the number of table occurences is counted
+# This sum determines the side that will contain the root node, in this case the node that would have
+# Most edges to other nodes, and this sum is crucial factor in the root node choice
+# Since JOIN creation does not have to follow a predetermined structure of how many and which tables
+# Will be joined, such a presumption had to be made in order to setup the structure that could
+# Come close to optimal one, as main point was to enable graph traversal
+# Tables are 'chained' to one another depending, of course, to their logic in the original query, and 
+# Should there be a duplicate, the one closest to the root & already processed is preserved
 
 if len(right) == len(left):
     print(True)
@@ -98,9 +109,9 @@ for i in primary_array:
         else:
             max_key = find_max_key(counts_r, processed)
     else: 
-        if len(processed)  != len(all_elements_unique):
+        if len(processed) != len(all_elements_unique):
             unprocessed = [x for x in all_elements_unique if x not in processed]
-            print(unprocessed)
+
             for index_secondary, element_unprocessed in enumerate(secondary_array):
                 if element_unprocessed in unprocessed:
                     Graph.add_edge(primary_array[index_secondary], element_unprocessed)

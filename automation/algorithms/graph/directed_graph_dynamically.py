@@ -8,12 +8,11 @@ Graph = nx.DiGraph()
 
 # TODO: To test other cases, if additional cases coverage is needed
 # TODO: Test edgecases
-# TODO: Cleanup needed
-# Prepare the table arrays, and weights
-# TODO: Nicer grpah presentation needed with Graphviz
 
-left = ['an', 'n', 'ci', 't', 'mk', 't', 'mc', 'an', 'ci', 'ci', 'mc']
-right = ['n', 'ci', 't', 'mk', 'k', 'mc', 'cn', 'ci', 'mc', 'mk', 'mk']
+# Needed structure of input data TODO
+left = ['t', 't', 'chn', 'rt', 'cn', 'ct', 'ci']
+right = ['mc', 'ci', 'ci', 'ci', 'mc', 'mc', 'mc']
+weights = {'chn': float('inf'), 'ci': float('inf'), 'cn': 0.006, 'ct': float('inf'), 'mc': float('inf'), 'rt': 0.083, 't': 0.536}
 
 if len(right) != len(left):
     raise Exception("Tables were not processed accordingly, do check!")
@@ -74,5 +73,8 @@ for i in primary_array:
                     
                     processed = list(set(processed))
 
+
+for node in Graph.nodes:
+    Graph.nodes[node]["weight"] = weights[node]
 
 plot_networkx_graph(Graph)

@@ -9,6 +9,7 @@ from temp.temp import test_query
 
 # TODO Add exception handling
 # TODO LIKE, IN filter needs it's own processing - filters can have different selectivity concatenated with AND, OR in single statement
+# TODO Cleanup
 
 tables = capture_all_the_tabes(test_query)
 tables = tables[0].split(",")
@@ -19,6 +20,9 @@ filters = filter_information[1]
 like = filter_information[2]
 
 table_information = []
+
+left = []
+right = []
 
 # Procesing of table name and alias, creating the dictionary structure
 for table in tables:
@@ -109,3 +113,22 @@ for table in table_information:
         child = join[2].split('.')[0]
         if parent == table['name']  or parent == table['alias']:
             table['children'].append(child)
+
+
+# Prepare JOIN data for graph processing
+for join in joins:
+    left.append(join[0].split('.')[0])
+    right.append(join[2].split('.')[0])
+
+
+# Prepare weights for graph processing
+# TODO Exception handling to be added!
+weights_alias = {}
+weights_table = {}
+for table in table_information:
+    if table['alias'] != '':
+        weights_alias[table['alias']] = table['weight']
+
+    weights_table[table['name']] = table['weight']
+
+

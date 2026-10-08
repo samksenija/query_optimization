@@ -9,7 +9,7 @@ Graph = nx.DiGraph()
 # TODO: To test other cases, if additional cases coverage is needed
 # TODO: Test edgecases
 
-# Needed structure of input data TODO
+# TODO Add as a function, connect to process_data.py
 left = ['t', 't', 'chn', 'rt', 'cn', 'ct', 'ci']
 right = ['mc', 'ci', 'ci', 'ci', 'mc', 'mc', 'mc']
 weights = {'chn': float('inf'), 'ci': float('inf'), 'cn': 0.006, 'ct': float('inf'), 'mc': float('inf'), 'rt': 0.083, 't': 0.536}

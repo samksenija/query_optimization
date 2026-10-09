@@ -7,6 +7,8 @@ import connection
 from patterns import capture_all_the_tabes, joins_and_filters
 from temp.temp import test_query
 
+from algorithms.graph.directed_graph_dynamically import directed_graph_dynamically
+
 # TODO Add exception handling
 # TODO LIKE, IN filter needs it's own processing - filters can have different selectivity concatenated with AND, OR in single statement
 # TODO Cleanup
@@ -131,4 +133,5 @@ for table in table_information:
 
     weights_table[table['name']] = table['weight']
 
-
+#Testing
+directed_graph_dynamically(left, right, weights_alias)

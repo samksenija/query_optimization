@@ -5,7 +5,7 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 import connection
 from patterns import capture_all_the_tabes, joins_and_filters
-from temp.temp import test_query
+from temp.job import job_1a
 
 from algorithms.graph.directed_graph_dynamically import directed_graph_dynamically
 
@@ -13,6 +13,7 @@ from algorithms.graph.directed_graph_dynamically import directed_graph_dynamical
 # TODO LIKE, IN filter needs it's own processing - filters can have different selectivity concatenated with AND, OR in single statement
 # TODO Cleanup
 
+test_query = job_1a
 tables = capture_all_the_tabes(test_query)
 tables = tables[0].split(",")
 

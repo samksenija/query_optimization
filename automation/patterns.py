@@ -39,7 +39,7 @@ def joins_and_filters(query):
 
     joins =re.findall(r"(\w+\.\w+)\s*(=)\s*(\w+\.\w+\;?)", query)
     all_filters = re.findall(r"(?i) ([(^AND)(\w.+)]+)\s?([=><])\s?([A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>/? ]+)", query)
-    like = re.findall(r"(?i)\b([\w.]+)\s+LIKE\s+([A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>/?]+)", query)
+    like = re.findall(r"(?i)\b([\w.]+)\s+(NOT\s+)?LIKE\s+'([^']*)'\s*(?:\b(AND|OR)\b)?", query)
 
     filters = [x for x in all_filters if x not in joins]
         
